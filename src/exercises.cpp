@@ -28,7 +28,30 @@ void exercise_1()
 
     while (std::cin.get(c))
     {      
-       // Your solution here
+        // Your solution here
+        non_empty = true;
+
+        if (c == '\n')
+        {
+            lines++;
+            in_word = false;
+        } else if (c == ' ' || c == '\t')
+        {
+            in_word = false;
+        } else 
+        {
+            if (!in_word) 
+            {
+                words++;
+                in_word = true;
+            }
+            characters++;
+        }
+    }
+
+    if (non_empty)
+    {
+        lines++;
     }
 
     std::cout << "\nNumber of characters: " << characters << '\n';
@@ -51,6 +74,39 @@ void exercise_2()
     std::cout << "Type some text to analyse, press ctrl+D/ctrl+Z to stop:\n\n";
 
     // Your solution here
+    do {
+        // Check for a new character
+        if (!std::cin.get(c)) 
+        {
+            break;
+        }
+
+        // Your solution here
+        non_empty = true;
+
+        if (c == '\n')
+        {
+            lines++;
+            in_word = false;
+        } else if (c == ' ' || c == '\t')
+        {
+            in_word = false;
+        } else 
+        {
+            if (!in_word) 
+            {
+                words++;
+                in_word = true;
+            }
+            characters++;
+        }
+
+    } while (true);
+
+    if (non_empty)
+    {
+        lines++;
+    }
 
     std::cout << "\nNumber of characters: " << characters << '\n';
     std::cout << "Number of words: " << words << '\n';
@@ -72,6 +128,41 @@ void exercise_3()
     std::cout << "Type some text to analyse, press ctrl+D/ctrl+Z to stop:\n\n";
 
     // Your solution here
+    while (std::cin.get(c))
+    {
+        // Your solution here
+        non_empty = true;
+
+        switch (c)
+        {
+        case '\n':
+            lines++; in_word = false;
+            break;
+
+        case ' ':
+            in_word = false;
+            break;
+
+        case '\t':
+            in_word = false;
+            break;
+        
+        default:
+            if (!in_word)
+            {
+                words++;
+                in_word = true;
+            }
+
+            characters++;
+            break;
+        }
+    }
+
+    if (non_empty)
+    {
+        lines++;
+    }
 
     std::cout << "\nNumber of characters: " << characters << '\n';
     std::cout << "Number of words: " << words << '\n';
@@ -100,6 +191,12 @@ void exercise_4(unsigned int number_of_steps, double step_size, double lower_lim
 
     double fahrenheit = lower_lim;
 
+    while (fahrenheit <= upper_lim)
+    {
+        std::cout << std::fixed << std::setprecision(1) << std::setw(10) << fahrenheit << std::setw(10) << (fahrenheit - 32.0) * 5.0 / 9.0 << "\n";
+        fahrenheit += step_size;
+    } 
+
     // Your solution here
 }
 
@@ -114,6 +211,16 @@ void exercise_5(unsigned int number_of_steps, double step_size, double lower_lim
     std::cout << std::setw(10) << "Fahrenheit" << std::setw(10) << "Celsius" << '\n';
 
     // Your solution here
+    double upper_lim = step_size * (number_of_steps - 1) + lower_lim;
+
+    double fahrenheit = lower_lim;
+
+    for (int i = 0; i < number_of_steps; i++)
+    {
+        std::cout << std::fixed << std::setprecision(1) << std::setw(10) << fahrenheit << std::setw(10) << (fahrenheit - 32.0) * 5.0 / 9.0 << "\n";
+        fahrenheit += step_size;
+    }
+    
 }
 
 /*
@@ -149,7 +256,10 @@ void exercise_6()
 
     while (std::cin.get(c) && c != '\n')
     {
-        // Your solution here
+        if (int(c) >= 48 && int(c) <= 57)
+        {
+            total += int(c) - 48;
+        }
     }
 
     std::cout << "Sum of the numbers is: " << total << '\n';
